@@ -117,163 +117,79 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"scripts.js":[function(require,module,exports) {
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+})({"node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
 
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-var paper = document.querySelector('#paper');
-var scissors = document.querySelector('#scissors');
-var rock = document.querySelector('#rock');
-var game = document.querySelector('#game');
-var gameChoice = document.querySelectorAll('.choice');
-var score = document.querySelector('.scoreNum');
-var scoreNum = 0;
-var chosen;
-var compChoice;
-var moves = {
-  // Your move
-  scissors: {
-    // Comp move
-    rock: 'lose',
-    paper: 'win',
-    scissors: 'tie'
-  },
-  // Your move
-  rock: {
-    // Comp move
-    rock: 'tie',
-    paper: 'lose',
-    scissors: 'win'
-  },
-  // Your move
-  paper: {
-    // Comp move
-    rock: 'win',
-    paper: 'tie',
-    scissors: 'lose'
-  }
-};
-
-function wait() {
-  var ms = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-  return new Promise(function (resolve) {
-    return setTimeout(resolve, ms);
-  });
-} // TODO: computer move function
-// generates num from 1 to 3. Returns rock/paper/scissors based on that
-
-
-function randomNum(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function changeScore(change) {
-  if (change === 'increase') {
-    scoreNum += 1;
-  } else if (change === 'decrease') {
-    scoreNum -= 1;
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
   }
 
-  score.innerText = scoreNum;
+  return bundleURL;
 }
 
-function compMove(yourChoice) {
-  var compNum = randomNum(1, 3);
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
 
-  switch (compNum) {
-    case 1:
-      compChoice = 'rock';
-      break;
-
-    case 2:
-      compChoice = 'paper';
-      break;
-
-    case 3:
-      compChoice = 'scissors';
-      break;
-
-    default:
-      console.warn('Invalid num from comp');
-      break;
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
   }
 
-  return compChoice;
+  return '/';
 }
 
-function resultsTransition() {
-  return _resultsTransition.apply(this, arguments);
-} // compares option player clicked against what computer picked
-// return whoincrease score
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
 
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"node_modules/parcel/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
 
-function _resultsTransition() {
-  _resultsTransition = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.next = 2;
-            return wait(1000);
+function updateLink(link) {
+  var newLink = link.cloneNode();
 
-          case 2:
-            //* remove background on game
-            game.classList.add('noBg');
-            console.log('waited'); //* add hidden class to choices that weren't selected
+  newLink.onload = function () {
+    link.remove();
+  };
 
-            gameChoice.forEach(function (choice) {
-              if (!choice.classList.contains('picked')) {
-                choice.classList.add('hidden');
-              }
-            }); //* wait
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
 
-            _context.next = 7;
-            return wait(500);
+var cssTimeout = null;
 
-          case 7:
-            //* add hidden class to game
-            game.classList.add('hidden'); //! bonus
-            //* move selected choice to position of results
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
 
-          case 8:
-          case "end":
-            return _context.stop();
-        }
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
       }
-    }, _callee);
-  }));
-  return _resultsTransition.apply(this, arguments);
+    }
+
+    cssTimeout = null;
+  }, 50);
 }
 
-function compareMove(yourChoice) {
-  compMove(yourChoice);
-  var result = moves[yourChoice][compChoice];
-  console.log("You chose ".concat(yourChoice, " and the computer chose ").concat(compChoice, ". You ").concat(result));
+module.exports = reloadCSS;
+},{"./bundle-url":"node_modules/parcel/src/builtins/bundle-url.js"}],"style.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
 
-  if (result === 'win') {
-    changeScore('increase');
-  } else if (result === 'lose') {
-    changeScore('decrease');
-  } // wait a few seconds
-  // call results
-
-
-  resultsTransition();
-}
-
-function handleClick(event) {
-  event.currentTarget.classList.add('picked');
-  compareMove(event.currentTarget.id); // yourChoice = event.currentTarget;
-  // console.log(yourChoice);
-} // compareMove('scissors');
-// TODO: increase score function
-
-
-gameChoice.forEach(function (choice) {
-  return choice.addEventListener('click', handleClick);
-});
-},{}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"./images/bg-triangle.svg":[["bg-triangle.4d1d2559.svg","images/bg-triangle.svg"],"images/bg-triangle.svg"],"./images/triangle-mobile.png":[["triangle-mobile.485ecad3.png","images/triangle-mobile.png"],"images/triangle-mobile.png"],"_css_loader":"node_modules/parcel/src/builtins/css-loader.js"}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -477,5 +393,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel/src/builtins/hmr-runtime.js","scripts.js"], null)
-//# sourceMappingURL=/scripts.b71a6038.js.map
+},{}]},{},["node_modules/parcel/src/builtins/hmr-runtime.js"], null)
+//# sourceMappingURL=/style.e308ff8e.js.map

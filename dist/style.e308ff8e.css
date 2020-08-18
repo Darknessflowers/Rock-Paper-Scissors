@@ -127,7 +127,7 @@ align-self: flex-start;
   margin: 0 auto;
   grid-template-rows: 203px 203px;
   grid-row-gap: 25px;
-  background-image: url(./images/bg-triangle.svg);
+  background-image: url(/bg-triangle.4d1d2559.svg);
   background-repeat: no-repeat;
   background-position: center;
   z-index: 1;
@@ -249,7 +249,7 @@ box-shadow: 0 10px 0 0 #9D1634, inset 0 7px 0px 0 hsl(228.5, 23.2%, 78%);
     max-width: 82%;
     grid-template-rows: 138px 138px;
     grid-row-gap: 15px;
-    background-image: url(./images/triangle-mobile.png);
+    background-image: url(/triangle-mobile.485ecad3.png);
   }
   #paper, #scissors, #rock {
     width: 129px;
@@ -281,3 +281,6 @@ box-shadow: 0 10px 0 0 #9D1634, inset 0 7px 0px 0 hsl(228.5, 23.2%, 78%);
 }
 }
 
+
+
+/*# sourceMappingURL=/style.e308ff8e.css.map */

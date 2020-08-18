@@ -7,11 +7,49 @@
   <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap"
+    rel="stylesheet">
   <title>Rock, Paper, Scissors</title>
+  <div class="container">
+    <header>
+      <img src="./images/logo.svg" alt="Rock Paper Scissors" class="logo" draggable="false">
+      <div class="score">
+        <h3>Score</h3>
+        <span class="scoreNum">0</span>
+      </div>
+    </header>
+    <div id="game">
+      <div id="paper" class="paper choice">
+        <img src="./images/icon-paper.svg" alt="Paper" draggable="false">
+      </div>
+      <div id="scissors" class="scissors choice">
+        <img src="./images/icon-scissors.svg" alt="Paper" draggable="false">
+      </div>
+      <div id="rock" class="rock choice">
+        <img src="./images/icon-rock.svg" alt="Paper" draggable="false">
+      </div>
+    </div>
+    <div id="results">
+      <div class="yourResult">
+        <h2>You Picked</h2>
+        <div class="playerResultIcon"></div>
+      </div>
+      <div class="resultText">
+        You Win
+        <button>Play again</button>
+      </div>
+      <div class="houseResult">
+        <h2>The House Picked</h2>
+        <div class="houseResultIcon"></div>
+      </div>
+    </div>
+  </div>
+  </div>
 
-  Score
-  Rules
+
+
+  <!-- Rules
 
   You Picked
   The House Picked
@@ -19,7 +57,7 @@
   You Win
   You Lose
 
-  Play Again
+  Play Again -->
 
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   <style>
@@ -38,10 +76,10 @@
 
 
 
-  <div class="attribution">
+  <!-- <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
     Coded by <a href="#">Your Name Here</a>.
-  </div>
+  </div> -->
   <script src="./scripts.js"></script>
 </body>
 
