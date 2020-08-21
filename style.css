@@ -1,3 +1,8 @@
+/* TODO: 
+* pixels to rem for font
+* css variables for colours
+* tablet size
+*/
 * {
   box-sizing: border-box;
 }
@@ -5,6 +10,7 @@ body {
   background: radial-gradient(ellipse at top, #1F3757, #131537);
   background-attachment: fixed;
   font-family: 'Barlow Semi Condensed', sans-serif;
+  color: #fff;
   margin: 0;
 }
 img {
@@ -14,14 +20,17 @@ img {
   max-width: 938px;
   margin: 0 auto;
 }
+#wrap {
+  display: grid;
+}
 header {
   width: 75%;
   border: 3px solid rgba(255, 255, 255, 0.25);
   border-radius: 15px;
-  padding: 15px 15px 15px 30px;
+  padding: 18px 22px 19px 30px;
   display: flex;
   justify-content: space-between;
-  margin: 45px auto 60px auto;
+  margin: 46px auto 61px auto;
 }
 .logo {
   align-self: center;
@@ -34,6 +43,7 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-bottom: 2px;
 }
 .score h3 {
   text-transform: uppercase;
@@ -49,77 +59,11 @@ header {
   color: #565468;
   line-height: 75px;
 }
-
-/* .paper,
-.rock,
-.scissors {
-  width: 198px;
-  height: 194px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-/* .paper {
-  background: linear-gradient(#5c70f5, #4664F4);
-}
-.rock {
-  background: linear-gradient(#dc425c, #DB2E4D);
-}
-.scissors {
-  background: linear-gradient(#eca725, #EB9F0E);
-} */
 .paper:hover,
 .scissors:hover,
 .rock:hover {
   cursor: pointer;
 }
-/* .paper::before,
-.rock::before,
-.scissors::before {
-  content: '';
-  height: 203px;
-  width: 198px;
-  display: block;
-  border-radius: 50%;
-  z-index: -3;
-  position: absolute;
-align-self: flex-start;
-} */
-/* .paper::before {
-  background: #2A45C2;
-}
-.rock::before {
-  background: #9D1634;
-}
-.scissors::before {
-  background: #C76C1B;
-} */
-/* .paper .inner,
-.rock .inner,
-.scissors .inner {
-  width: 152px;
-  height: 152px;
-  border-radius: 50%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  background: #BABFD4;
-} */
-/* .inner-bottom {
-    background: linear-gradient(to bottom, #DADADA, #F3F3F3);
-    height: 144px;
-    width: 100%;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.inner-bottom img {
-  width: 70px;
-  height: auto;
-  z-index: 5;
-} */
 #game {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -129,13 +73,23 @@ align-self: flex-start;
   grid-row-gap: 25px;
   background-image: url(./images/bg-triangle.svg);
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center 60%;
   z-index: 1;
   position: relative;
   max-width: 100%;
+  grid-column: 1/-1;
+  grid-row: 1/-1;
 }
 #game.noBg {
   background-image: initial;
+}
+.playerResultIcon {
+  width: 198px;
+  height: 193px;
+  background: transparent;
+  border-radius: 50%;
+  border: 23px solid transparent;
+  box-shadow: 0 10px 0 0 transparent, inset 0 8px 0px 0 transparent;
 }
 .rock {
   grid-column: 1/-1;
@@ -145,38 +99,39 @@ justify-self: center;
   grid-column-end: -1;
   justify-self: end;
 }
-#paper,
-#scissors,
-#rock {
+.paper,
+.scissors,
+.rock {
   background: linear-gradient(to bottom, #DADADA, #F3F3F3);
   width: 198px;
-  height: 194px;
+  height: 193px;
   border-radius: 50%;
   border: 23px solid;
+  border-bottom-width: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   transition: all 0.2s ease;
 }
-#paper {
+.paper {
 border-color: #4664F4;
-box-shadow: 0 10px 0 0 #2A45C2, inset 0 7px 0px 0 hsl(228.5, 23.2%, 78%);
+box-shadow: 0 10px 0 0 #2A45C2, inset 0  8px 0px 0 hsl(228.5, 23.2%, 78%);
 
 }
-#scissors {
+.scissors {
 border-color: #EB9F0E;
-box-shadow: 0 10px 0 0 #C76C1B, inset 0 7px 0px 0 hsl(228.5, 23.2%, 78%);
+box-shadow: 0 10px 0 0 #C76C1B, inset 0 8px 0px 0 hsl(228.5, 23.2%, 78%);
 
 }
-#rock {
+.rock {
 border-color: #DB2E4D;
-box-shadow: 0 10px 0 0 #9D1634, inset 0 7px 0px 0 hsl(228.5, 23.2%, 78%);
+box-shadow: 0 10px 0 0 #9D1634, inset 0 8px 0px 0 hsl(228.5, 23.2%, 78%);
 
 }
-#paper::before,
-#scissors::before,
-#rock::before {
+.paper::before,
+.scissors::before,
+.rock::before {
   background: linear-gradient(to bottom, rgba(255,255,255,0.1), transparent);
   content: '';
   display: block;
@@ -185,21 +140,26 @@ box-shadow: 0 10px 0 0 #9D1634, inset 0 7px 0px 0 hsl(228.5, 23.2%, 78%);
   height: 194px;
   border-radius: 50%;
 }
-.choice img {
-  width: 70px;
+.choice img,
+.scissors img,
+.rock img,
+.paper img {
+  width: 68px;
+  margin-top: 10px;
   z-index: 5;
 }
 #paper:hover,
 #scissors:hover,
 #rock:hover {
-  transform: scale(1.1);
+  /* transform: scale(1.1); */
   transition: all 0.2s ease;
 }
 
-#paper::after,
-#scissors::after,
-#rock::after {
-  /* opacity: 0; */
+.paper::after,
+.scissors::after,
+.rock::after,
+.playerResultIcon::after {
+
   transition: all 0.2s ease-in-out;
   content: '';
   display: block;
@@ -210,12 +170,10 @@ box-shadow: 0 10px 0 0 #9D1634, inset 0 7px 0px 0 hsl(228.5, 23.2%, 78%);
   z-index: -1;
   border-radius: 50%;
   margin-top: 10px;
-}
-#paper:hover::after,
-#scissors:hover::after,
-#rock:hover::after {
-  /* opacity: 1; */
-  transition: all 0.2s ease-in-out;
+} 
+.paper:hover::after,
+.scissors:hover::after,
+.rock:hover::after {  transition: all 0.2s ease-in-out;
   background: rgba(255,255,255,0.05);
 }
 
@@ -224,13 +182,31 @@ box-shadow: 0 10px 0 0 #9D1634, inset 0 7px 0px 0 hsl(228.5, 23.2%, 78%);
   transition: all 0.4s ease-in-out;
 }
 #results {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  justify-items: center;
+  display: flex;
+  justify-content: center;
+  grid-row: 1/-1;
+grid-column: 1/-1;
 }
+#results.hidden {
+  /* opacity: 0.5; */
+  pointer-events: none;
+}
+.resultText {
+  display: none;
+  width: 1px;
+  opacity: 0;
+  /* transition: all 0.3s; */
+  /* width: 200px; */
+}
+
 
 /** Mobile styles **/
 @media only screen and (max-width: 600px) {
+  #wrap {
+    max-width: 82%;
+    display: grid;
+    margin: 0 auto;
+}
   .logo {
     max-height: 57px;
 }
@@ -246,7 +222,8 @@ box-shadow: 0 10px 0 0 #9D1634, inset 0 7px 0px 0 hsl(228.5, 23.2%, 78%);
     line-height: 48px;
   }
   #game {
-    max-width: 82%;
+    /* max-width: 82%; */
+    width: auto;
     grid-template-rows: 138px 138px;
     grid-row-gap: 15px;
     background-image: url(./images/triangle-mobile.png);
@@ -256,7 +233,8 @@ box-shadow: 0 10px 0 0 #9D1634, inset 0 7px 0px 0 hsl(228.5, 23.2%, 78%);
     height: 132px;
     border-width: 15px;
   }
-  #paper::before, #scissors::before, #rock::before {
+  #paper::before, #scissors::before, #rock::before,
+  .playerResultIcon::before {
     width: 129px;
     height: 132px;
   }

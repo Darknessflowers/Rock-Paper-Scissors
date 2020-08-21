@@ -19,29 +19,33 @@
         <span class="scoreNum">0</span>
       </div>
     </header>
-    <div id="game">
-      <div id="paper" class="paper choice">
-        <img src="./images/icon-paper.svg" alt="Paper" draggable="false">
+    <div id="wrap">
+      <div id="game">
+        <div id="paper" class="paper choice">
+          <img src="./images/icon-paper.svg" alt="Paper" draggable="false">
+        </div>
+        <div id="scissors" class="scissors choice">
+          <img src="./images/icon-scissors.svg" alt="Paper" draggable="false">
+        </div>
+        <div id="rock" class="rock choice">
+          <img src="./images/icon-rock.svg" alt="Paper" draggable="false">
+        </div>
       </div>
-      <div id="scissors" class="scissors choice">
-        <img src="./images/icon-scissors.svg" alt="Paper" draggable="false">
-      </div>
-      <div id="rock" class="rock choice">
-        <img src="./images/icon-rock.svg" alt="Paper" draggable="false">
-      </div>
-    </div>
-    <div id="results">
-      <div class="yourResult">
-        <h2>You Picked</h2>
-        <div class="playerResultIcon"></div>
-      </div>
-      <div class="resultText">
-        You Win
-        <button>Play again</button>
-      </div>
-      <div class="houseResult">
-        <h2>The House Picked</h2>
-        <div class="houseResultIcon"></div>
+      <div id="results" class="hidden">
+        <div class="yourResult">
+          <h2>You Picked</h2>
+          <div class="playerResultIcon">
+            <img src="" alt="">
+          </div>
+        </div>
+        <div class="resultText">
+          <span class="result">You Win</span>
+          <button class="restart">Play again</button>
+        </div>
+        <div class="houseResult">
+          <h2>The House Picked</h2>
+          <div class="houseResultIcon"></div>
+        </div>
       </div>
     </div>
   </div>
