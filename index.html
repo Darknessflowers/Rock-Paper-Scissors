@@ -35,21 +35,32 @@
         <div class="yourResult">
           <h2>You Picked</h2>
           <div class="playerResultIcon">
-            <img src="" alt="">
+            <img src="" alt="" draggable="false">
           </div>
         </div>
-        <div class="resultText">
+        <div class="resultText closed opacityHidden">
           <span class="result">You Win</span>
           <button class="restart">Play again</button>
         </div>
         <div class="houseResult">
           <h2>The House Picked</h2>
-          <div class="houseResultIcon"></div>
+          <div class="houseResultIcon empty">
+            <img src="" alt="" draggable="false">
+          </div>
+          <div class="hideHouse"></div>
         </div>
       </div>
     </div>
   </div>
   </div>
+  <div class="rulesModalOuter">
+    <div class="rulesModalInner">
+      <button class="closeModal"><img src="./images/icon-close.svg" alt="Close Modal" draggable="false"></button>
+      <h2>Rules</h2>
+      <img src="./images/image-rules.svg" alt="Rock Paper Scissors rules" draggable="false">
+    </div>
+  </div>
+  <button class="rulesBtn">Rules</button>
 
 
 

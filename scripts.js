@@ -1,6 +1,4 @@
 // TODO:
-//* Style results page
-//* Reimplement restart button
 //* Local storage
 //* mobile styling
 //* animation clean up
@@ -12,11 +10,18 @@ const game = document.querySelector('#game');
 const results = document.querySelector('#results');
 const gameChoice = document.querySelectorAll('.choice');
 const score = document.querySelector('.scoreNum');
+const resultOuter = document.querySelector('.resultText');
 const resultText = document.querySelector('.result');
 const restartBtn = document.querySelector('.restart');
 const resultsPlayerIcon = document.querySelector('.playerResultIcon');
+const houseIcon = document.querySelector('.houseResultIcon');
 // const resultPlayerImage = document.createElement('img');
 const resultInnerImage = resultsPlayerIcon.querySelector('img');
+const houseIconImage = houseIcon.querySelector('img');
+const houseIconCover = document.querySelector('.hideHouse');
+const rulesModal = document.querySelector('.rulesModalOuter');
+const rulesBtn = document.querySelector('.rulesBtn');
+const closeRulesBtn = document.querySelector('.closeModal');
 
 let choiceCoords;
 let pickCoords = resultsPlayerIcon.getBoundingClientRect();
@@ -61,6 +66,26 @@ function randomNum(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function mirrorToLocalStorage() {
+  // send score to local storage
+  // localStorage.setItem(
+  //   'score',
+  //   JSON.stringify({
+  //     scoreNum,
+  //   })
+  // );
+  localStorage.setItem('score', scoreNum);
+}
+function retreiveFromLocalStorage() {
+  // get score from local storage and display
+  const retreivedScore = JSON.parse(localStorage.getItem('score'));
+  console.log(retreivedScore);
+  if (retreivedScore > 0) {
+    scoreNum = retreivedScore;
+    score.innerText = retreivedScore;
+  }
+}
+
 function changeScore(change) {
   if (change === 'increase') {
     scoreNum += 1;
@@ -68,13 +93,14 @@ function changeScore(change) {
     scoreNum -= 1;
   }
   score.innerText = scoreNum;
+  mirrorToLocalStorage();
 }
 
 async function resultsTransition() {
-  // TODO
+  // add class of chosen move to the results icon
   resultsPlayerIcon.classList.add(chosen);
   resultInnerImage.src = `./images/icon-${chosen}.svg`;
-  await wait(1000);
+  await wait(200); // wait so that icon has time to load
   //* remove background on game
   game.classList.add('noBg');
   //* add hidden class to choices that weren't selected
@@ -83,39 +109,48 @@ async function resultsTransition() {
       choice.classList.add('hidden');
     }
   });
-  await wait(1000);
+  await wait(500);
   gameChoice.forEach(choice => {
     if (choice.classList.contains('picked')) {
-      choice.style.transform = `translate3d(${moveX}px, ${moveY}px,0)`;
+      choice.style.transform = `translate3d(${moveX}px, ${moveY}px,0)`; // move icon to results section
     }
   });
   //* wait
-  await wait(450);
+  await wait(450); // let translate animation play
   results.classList.remove('hidden');
-
-  //* add hidden class to game
-
   results.style.pointerEvents = 'all';
-
+  //* add hidden class to game
   game.style.display = 'none';
   game.classList.add('hidden');
-
-  // if not the first time playing set it to grid
-
+  // add icon to house
+  houseIcon.classList.replace('empty', compChoice);
+  houseIconImage.src = `./images/icon-${compChoice}.svg`;
+  await wait(500);
+  houseIconCover.classList.add('hidden');
+  await wait(150);
+  // make icon go BIG
+  houseIconCover.classList.add('scale');
+  resultsPlayerIcon.classList.add('scaleUp');
+  houseIcon.classList.add('scaleUp');
+  // scaleIcon
+  // get width of scaled element
+  // set parent to same width
+  await wait(600);
+  resultOuter.classList.remove('closed');
+  await wait(500);
+  resultOuter.classList.remove('opacityHidden');
   if (result === 'win') {
     changeScore('increase');
+    resultsPlayerIcon.classList.add('winner');
   } else if (result === 'lose') {
     if (score >= 0) {
       changeScore('decrease');
     }
+    houseIcon.classList.add('winner');
   }
-
-  //! bonus
-  //* move selected choice to position of results
 }
 
 function compMove() {
-  // debugger;
   const compNum = randomNum(1, 3);
   // find computers choice based on random number
   switch (compNum) {
@@ -168,10 +203,35 @@ function handleClick(event) {
 function restartGame() {
   // hide results
   results.classList.add('hidden');
+  houseIconImage.src = ``;
   // bring back game
   game.classList.remove('noBg');
   game.classList.remove('hidden');
   game.style.display = 'grid';
+
+  resultOuter.classList.add('closed');
+  resultOuter.classList.add('opacityHidden');
+
+  moveY = 0;
+  moveX = 0;
+  houseIcon.classList.replace(compChoice, 'empty');
+  houseIconCover.classList.remove('hidden');
+  houseIconCover.classList.remove('scale');
+  resultsPlayerIcon.classList.remove('scaleUp');
+  houseIcon.classList.remove('scaleUp');
+
+  if (resultsPlayerIcon.classList.contains('winner')) {
+    resultsPlayerIcon.classList.remove('winner');
+  } else if (houseIcon.classList.contains('winner')) {
+    houseIcon.classList.remove('winner');
+  }
+
+  gameChoice.forEach(choice => {
+    if (choice.classList.contains('picked')) {
+      choice.style.transform = `translate3d(${moveX}px, ${moveY}px,0)`;
+    }
+  });
+  resultsPlayerIcon.classList.remove(chosen);
   gameChoice.forEach(choice => {
     choice.classList.remove('hidden');
     choice.classList.remove('picked');
@@ -179,8 +239,31 @@ function restartGame() {
   // add event listeners back
   gameChoice.forEach(choice => choice.addEventListener('click', handleClick));
 }
+function handleModalClick() {
+  rulesModal.classList.add('open');
+}
+function closeModal() {
+  rulesModal.classList.remove('open');
+}
+rulesModal.addEventListener('click', event => {
+  const isOutside = !event.target.closest('.rulesModalInner');
+  if (isOutside) {
+    closeModal();
+  }
+});
+
+window.addEventListener('keydown', event => {
+  if (event.key === 'Escape') {
+    closeModal();
+  }
+});
+
 gameChoice.forEach(choice => choice.addEventListener('click', handleClick));
 restartBtn.addEventListener('click', restartGame);
 document.addEventListener('resize', () => {
   pickCoords = resultsPlayerIcon.getBoundingClientRect();
 });
+rulesBtn.addEventListener('click', handleModalClick);
+closeRulesBtn.addEventListener('click', closeModal);
+
+retreiveFromLocalStorage();
