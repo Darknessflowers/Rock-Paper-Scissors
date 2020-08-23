@@ -21,7 +21,6 @@ img {
 .container {
   max-width: 938px;
   margin: 0 auto;
-  overflow: hidden;
 }
 #wrap {
   display: grid;
@@ -286,7 +285,7 @@ grid-column: 1/-1;
   width: 204px;
   position: absolute;
   background: linear-gradient(140deg, #172542, #151e3d);
-  bottom: -10px;
+  bottom: 30px;
   border-radius: 50%;
   z-index: 30;
   transition: opacity 0.3s;
@@ -430,6 +429,7 @@ body {
 }
   .container {
     max-width: 100%;
+    overflow: hidden;
   }
   header {
     width: 311px;
