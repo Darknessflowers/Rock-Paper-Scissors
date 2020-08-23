@@ -16,6 +16,10 @@ img {
 .container {
   max-width: 938px;
   margin: 0 auto;
+  /* for screenshot */
+  height: 100vh;
+  overflow-y: hidden;
+
 }
 #wrap {
   display: grid;
