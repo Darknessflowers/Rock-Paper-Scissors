@@ -268,11 +268,11 @@ grid-column: 1/-1;
 }
 .hideHouse {
   /* height: 206px; */
-  height: 211px;
+  height: 210px;
   width: 204px;
   position: absolute;
   background: linear-gradient(140deg, #172542, #151e3d);
-  bottom: 30px;
+  bottom: 28px;
   border-radius: 50%;
   z-index: 30;
   transition: opacity 0.3s;
