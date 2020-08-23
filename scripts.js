@@ -63,7 +63,6 @@ function mirrorToLocalStorage() {
 function retreiveFromLocalStorage() {
   // get score from local storage and display
   const retreivedScore = JSON.parse(localStorage.getItem('score'));
-  console.log(retreivedScore);
   if (retreivedScore > 0) {
     scoreNum = retreivedScore;
     score.innerText = retreivedScore;
@@ -74,7 +73,6 @@ function changeScore(change) {
   if (change === 'increase') {
     scoreNum += 1;
   } else if (change === 'decrease') {
-    console.log('decrease complete');
     scoreNum -= 1;
   }
   score.innerText = scoreNum;
@@ -126,16 +124,14 @@ async function resultsTransition() {
   }
   resultOuter.classList.remove('closed');
   if (window.innerWidth >= 600) {
-    await wait(3000);
+    await wait(300);
   }
   resultOuter.classList.remove('opacityHidden');
-  console.log(result);
   if (result === 'win') {
     changeScore('increase');
     resultsPlayerIcon.classList.add('winner');
   } else if (result === 'lose') {
     if (scoreNum > 0) {
-      console.log('decreasing');
       changeScore('decrease');
     }
     houseIcon.classList.add('winner');
@@ -167,9 +163,6 @@ function compareMove(yourChoice) {
   compMove(yourChoice);
   chosen = yourChoice;
   result = moves[yourChoice][compChoice];
-  console.log(
-    `You chose ${yourChoice} and the computer chose ${compChoice}. You ${result}`
-  );
   resultText.innerText = `You ${result}`;
   // call results
   resultsTransition();
