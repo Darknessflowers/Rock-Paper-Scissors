@@ -17,7 +17,7 @@ img {
   max-width: 938px;
   margin: 0 auto;
   /* for screenshot */
-  height: 768px;
+  height: 800px;
   overflow-y: hidden;
 }
 #wrap {
@@ -30,7 +30,7 @@ header {
   padding: 25px 22px 19px 30px;
   display: flex;
   justify-content: space-between;
-  margin: 46px auto 61px auto;
+  margin: 46px auto 64px auto;
 }
 .logo {
   align-self: center;
