@@ -17,9 +17,8 @@ img {
   max-width: 938px;
   margin: 0 auto;
   /* for screenshot */
-  height: 100vh;
+  height: 768px;
   overflow-y: hidden;
-
 }
 #wrap {
   display: grid;
