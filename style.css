@@ -8,6 +8,7 @@ body {
   font-family: 'Barlow Semi Condensed', sans-serif;
   color: #fff;
   margin: 0;
+  overflow-x: hidden;
 }
 img {
   display: block;
@@ -262,6 +263,7 @@ grid-column: 1/-1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 .houseResult {
   position: relative;
@@ -472,7 +474,7 @@ body {
   }
   .paper {
     border-color: #4664F4;
-    box-shadow: 0 5px 0 0 #2A45C2, inset 0 5px 0px 0 hsl(228.5, 23.2%), 78%, 0px 3px 3px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 0 0 #2A45C2, inset 0 5px 0 0 hsl(228.5, 23.2%, 78%), 0px 3px 3px rgba(0,0,0,0.2);
   }
   .scissors {
     border-color: #EB9F0E;
