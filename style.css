@@ -5,6 +5,7 @@
 */
 * {
   box-sizing: border-box;
+  font-family: 'Barlow Semi Condensed', sans-serif;
 }
 body {
   background: radial-gradient(ellipse at top, #1F3757, #131537);
@@ -20,6 +21,7 @@ img {
 .container {
   max-width: 938px;
   margin: 0 auto;
+  overflow: hidden;
 }
 #wrap {
   display: grid;
@@ -124,35 +126,22 @@ justify-self: center;
 align-items: center;
 justify-content: center;
 }
-.scaleUp {
-  width: 292px;
-  height: 282px;
-  border: 34px solid;
-  border-bottom-width: 24px;
-  transition: all 0.2s linear;
-  cursor: default !important;
-}
+
 .paper {
 border-color: #4664F4;
 box-shadow: 0 10px 0 0 #2A45C2, inset 0  8px 0px 0 hsl(228.5, 23.2%, 78%), 0px 3px 3px rgba(0,0,0,0.2);
 }
-.paper.scaleUp {
-  box-shadow: 0 16px 0 0 #2A45C2, inset 0  11px 0px 0 hsl(228.5, 23.2%, 78%), 0px 4.4px 4.4px rgba(0,0,0,0.2);
-}
+
 .scissors {
 border-color: #EB9F0E;
 box-shadow: 0 10px 0 0 #C76C1B, inset 0 8px 0px 0 hsl(228.5, 23.2%, 78%), 0px 3px 3px rgba(0,0,0,0.2);
 }
-.scissors.scaleUp {
-  box-shadow: 0 16px 0 0 #C76C1B, inset 0  11px 0px 0 hsl(228.5, 23.2%, 78%), 0px 4.4px 4.4px rgba(0,0,0,0.2);
-}
+
 .rock {
 border-color: #DB2E4D;
 box-shadow: 0 10px 0 0 #9D1634, inset 0 8px 0px 0 hsl(228.5, 23.2%, 78%), 0px 3px 3px rgba(0,0,0,0.2);
 }
-.rock.scaleUp {
-  box-shadow: 0 16px 0 0 #9D1634, inset 0  11px 0px 0 hsl(228.5, 23.2%, 78%), 0px 4.4px 4.4px rgba(0,0,0,0.2);
-}
+
 .paper::before,
 .scissors::before,
 .rock::before {
@@ -206,10 +195,7 @@ box-shadow: 0 10px 0 0 #9D1634, inset 0 8px 0px 0 hsl(228.5, 23.2%, 78%), 0px 3p
   height: 718px;
   background: radial-gradient(#2b3958,#2b3958 40%, #263555 40%, #263555 55%, #203050 55%);
 }
-.scaleUp img {
-  width: 100px;
-  transition: all 0.2s linear;
-}
+
 .hidden {
   opacity: 0;
   transition: all 0.4s ease-in-out;
@@ -247,7 +233,8 @@ grid-column: 1/-1;
   padding: 0 50px;
   width: 100%;
   max-width: 340px;
-  transition: width 0.4s;
+  transition: width 0.4s ease-in;
+  margin-top: 80px;
 }
 .resultText.opacityHidden {
   opacity: 0;
@@ -258,6 +245,7 @@ grid-column: 1/-1;
   text-transform: uppercase;
   font-weight: 700;
   text-shadow: 0 3px 3px rgba(0,0,0,0.2);
+  transition: width 0.4s ease-in;
 }
 #results h2 {
   text-transform: uppercase;
@@ -293,24 +281,6 @@ grid-column: 1/-1;
 .houseResult {
   position: relative;
 }
-
-
-
-/* .houseResultIcon.empty {
-  background: rgba(0,0,0,0.2);
-  width: 198px;
-  height: 193px;
-  border-radius: 50%;
-  border: 23px solid transparent;
-  border-bottom-width: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  transition: all 0.2s ease;
-  box-shadow: 0 10px 0 0 transparent, 0px 3px 3px rgba(0,0,0,0.2);
-} */
-
 .hideHouse {
   height: 206px;
   width: 204px;
@@ -330,7 +300,7 @@ grid-column: 1/-1;
 }
 .rulesBtn {
   position: absolute;
-  bottom: 30px;
+  bottom: 32px;
   right: 30px;
   border: 1px solid white;
   border-radius: 10px;
@@ -338,10 +308,11 @@ grid-column: 1/-1;
   color: #fff;
   text-transform: uppercase;
   font-size: 16px;
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
   font-weight: 600;
-  padding: 10px 40px;
+  padding: 11px 37px;
   cursor: pointer;
+  font-family: 'Barlow Semi Condensed', sans-serif;
 }
 .rulesBtn:hover {
   background: #131637;
@@ -363,13 +334,13 @@ pointer-events: all;
 opacity: 1;
 }
 .rulesModalInner {
-  width: 400px;
+  min-width: 400px;
   max-width: 90%;
   background: #fff;
   display: flex;
   justify-content: center;
   border-radius: 8px;
-  padding: 30px;
+  padding: 40px;
   flex-direction: column;
   position: relative;
 }
@@ -378,18 +349,93 @@ opacity: 1;
   font-size: 32px;
   text-transform: uppercase;
   font-weight: 700;
+  margin-top: 0;
+}
+.rulesModalInner img {
+  align-self: center;
 }
 .closeModal {
   position: absolute;
-  top: 20px;
-  right: 10px;
+  top: 40px;
+  right: 30px;
   border: none;
   background: transparent;
   cursor: pointer;
 }
 
 /** Mobile styles **/
+@media only screen and (min-width: 600px) {
+  .scaleUp {
+    width: 292px;
+    height: 282px;
+    border: 34px solid;
+    border-bottom-width: 24px;
+    transition: all 0.2s linear;
+    cursor: default !important;
+  }
+  .paper.scaleUp {
+    border-color: #4664F4;
+    box-shadow: 0 16px 0 0 #2A45C2, inset 0  11px 0px 0 hsl(228.5, 23.2%, 78%), 0px 4.4px 4.4px rgba(0,0,0,0.2);
+  }
+  .scissors.scaleUp {
+    border-color: #EB9F0E;
+    box-shadow: 0 16px 0 0 #C76C1B, inset 0  11px 0px 0 hsl(228.5, 23.2%, 78%), 0px 4.4px 4.4px rgba(0,0,0,0.2);
+  }
+  .rock.scaleUp {
+    border-color: #DB2E4D;
+    box-shadow: 0 16px 0 0 #9D1634, inset 0  11px 0px 0 hsl(228.5, 23.2%, 78%), 0px 4.4px 4.4px rgba(0,0,0,0.2);
+  }
+  .scaleUp img {
+    width: 100px;
+    transition: all 0.2s linear;
+  }
+}
 @media only screen and (max-width: 600px) {
+body {
+  padding-bottom: 20px;
+}
+.rulesModalInner h2 {
+  text-align: center;
+}
+.rulesModalOuter {
+  background: #fff;
+}
+.rulesModalInner {
+  min-width: initial;
+  max-width: 90%;
+  background: #fff;
+  justify-content: space-between;
+  border-radius: 0;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  margin: 0 auto;
+  max-height: 80vh;
+}
+.closeModal {
+  position: relative;
+  right: initial;
+  order: 3;
+  justify-content: center;
+  display: flex;
+  width: 100%;
+}
+.rulesBtn {
+  position: relative;
+  bottom: initial;
+  right: initial; 
+  justify-content: center;
+  display: flex;
+  margin: 40px auto 0;
+}
+  .container {
+    max-width: 100%;
+  }
+  header {
+    width: 311px;
+    max-width: 90%;
+    margin-top: 30px;
+}
   #wrap {
     max-width: 82%;
     display: grid;
@@ -410,40 +456,87 @@ opacity: 1;
     line-height: 48px;
   }
   #game {
-    /* max-width: 82%; */
     width: auto;
     grid-template-rows: 138px 138px;
     grid-row-gap: 15px;
     background-image: url(./images/triangle-mobile.png);
+    background-position: center 20%;
   }
-  #paper, #scissors, #rock {
+  .paper, 
+  .scissors, 
+  .rock, 
+  .playerResultIcon,
+  .houseResultIcon {
     width: 129px;
     height: 132px;
     border-width: 15px;
+    transition-property: transform;
   }
-  #paper::before, #scissors::before, #rock::before,
+  .paper::before, .scissors::before, .rock::before,
   .playerResultIcon::before {
     width: 129px;
     height: 132px;
   }
-  .choice img {
+  .choice img,
+  .paper img,
+  .scissors img,
+  .rock img {
     width: 43px;
   }
-  #paper {
+  .paper {
     border-color: #4664F4;
     box-shadow: 0 5px 0 0 #2A45C2, inset 0 5px 0px 0 hsl(228.5, 23.2%), 78%, 0px 3px 3px rgba(0,0,0,0.2);
   }
-  #scissors {
+  .scissors {
     border-color: #EB9F0E;
     box-shadow: 0 5px 0 0 #C76C1B, inset 0 5px 0px 0 hsl(228.5, 23.2%, 78%), 0px 3px 3px rgba(0,0,0,0.2);
   }
-  #rock {
+  .rock {
     border-color: #DB2E4D;
     box-shadow: 0 5px 0 0 #9D1634, inset 0 5px 0px 0 hsl(228.5, 23.2%, 78%), 0px 3px 3px rgba(0,0,0,0.2);
   }
-  #paper::after, #scissors::after, #rock::after {
+  .paper::after, #scissors::after, #rock::after {
     content: initial;
     display: initial;
 }
+#results {
+  display: grid;
+  /*stop grid exceeding container */
+  grid-template-columns: repeat(2, minmax(0, 1fr)); 
+  grid-column-gap: 23px;
 }
-
+.resultText {
+  margin-top: 50px;
+  order: 2;
+  grid-column: 1/-1;
+  padding: 0;
+  justify-self: center;
+  max-height: 140px;
+}
+#results h2 {
+  letter-spacing: 1.5px;
+  font-size: 15px;
+}
+.restart {
+  max-width: 220px;
+}
+.yourResult h2, .houseResult h2 {
+  order: 2;
+}
+.paper:hover::after, .scissors:hover::after, .rock:hover::after, .playerResultIcon:hover::after {
+  content: initial;
+}
+.winner::after {
+  width: 288px;
+  height: 288px;
+}
+.hideHouse {
+  height: 142px;
+  width: 134px;
+  bottom: initial;
+}
+.hideHouse.scale {
+  transform: initial;
+  bottom: 30px;
+}
+}

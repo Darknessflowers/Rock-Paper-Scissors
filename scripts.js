@@ -67,13 +67,6 @@ function randomNum(min, max) {
 }
 
 function mirrorToLocalStorage() {
-  // send score to local storage
-  // localStorage.setItem(
-  //   'score',
-  //   JSON.stringify({
-  //     scoreNum,
-  //   })
-  // );
   localStorage.setItem('score', scoreNum);
 }
 function retreiveFromLocalStorage() {
@@ -90,6 +83,7 @@ function changeScore(change) {
   if (change === 'increase') {
     scoreNum += 1;
   } else if (change === 'decrease') {
+    console.log('decrease complete');
     scoreNum -= 1;
   }
   score.innerText = scoreNum;
@@ -129,6 +123,7 @@ async function resultsTransition() {
   houseIconCover.classList.add('hidden');
   await wait(150);
   // make icon go BIG
+
   houseIconCover.classList.add('scale');
   resultsPlayerIcon.classList.add('scaleUp');
   houseIcon.classList.add('scaleUp');
@@ -139,11 +134,13 @@ async function resultsTransition() {
   resultOuter.classList.remove('closed');
   await wait(500);
   resultOuter.classList.remove('opacityHidden');
+  console.log(result);
   if (result === 'win') {
     changeScore('increase');
     resultsPlayerIcon.classList.add('winner');
   } else if (result === 'lose') {
-    if (score >= 0) {
+    if (scoreNum > 0) {
+      console.log('decreasing');
       changeScore('decrease');
     }
     houseIcon.classList.add('winner');
@@ -203,6 +200,7 @@ function handleClick(event) {
 function restartGame() {
   // hide results
   results.classList.add('hidden');
+  resultInnerImage.src = ``;
   houseIconImage.src = ``;
   // bring back game
   game.classList.remove('noBg');
