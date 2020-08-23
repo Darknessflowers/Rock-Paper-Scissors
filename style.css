@@ -267,7 +267,8 @@ grid-column: 1/-1;
   position: relative;
 }
 .hideHouse {
-  height: 206px;
+  /* height: 206px; */
+  height: 211px;
   width: 204px;
   position: absolute;
   background: linear-gradient(140deg, #172542, #151e3d);
