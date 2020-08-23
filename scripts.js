@@ -121,9 +121,9 @@ async function resultsTransition() {
   // scaleIcon
   // get width of scaled element
   // set parent to same width
-  await wait(600);
+  await wait(250);
   resultOuter.classList.remove('closed');
-  await wait(500);
+  await wait(300);
   resultOuter.classList.remove('opacityHidden');
   console.log(result);
   if (result === 'win') {
