@@ -1,11 +1,3 @@
-// TODO:
-//* Local storage
-//* mobile styling
-//* animation clean up
-//* refactor with modules
-// const paper = document.querySelector('#paper');
-// const scissors = document.querySelector('#scissors');
-// const rock = document.querySelector('#rock');
 const game = document.querySelector('#game');
 const results = document.querySelector('#results');
 const gameChoice = document.querySelectorAll('.choice');
@@ -15,7 +7,6 @@ const resultText = document.querySelector('.result');
 const restartBtn = document.querySelector('.restart');
 const resultsPlayerIcon = document.querySelector('.playerResultIcon');
 const houseIcon = document.querySelector('.houseResultIcon');
-// const resultPlayerImage = document.createElement('img');
 const resultInnerImage = resultsPlayerIcon.querySelector('img');
 const houseIconImage = houseIcon.querySelector('img');
 const houseIconCover = document.querySelector('.hideHouse');
@@ -175,10 +166,7 @@ function compareMove(yourChoice) {
   console.log(
     `You chose ${yourChoice} and the computer chose ${compChoice}. You ${result}`
   );
-
   resultText.innerText = `You ${result}`;
-  // wait a few seconds
-
   // call results
   resultsTransition();
 }
@@ -193,8 +181,6 @@ function handleClick(event) {
     choice.removeEventListener('click', handleClick)
   );
   compareMove(event.currentTarget.id);
-
-  // yourChoice = event.currentTarget;
 }
 
 function restartGame() {
@@ -206,10 +192,8 @@ function restartGame() {
   game.classList.remove('noBg');
   game.classList.remove('hidden');
   game.style.display = 'grid';
-
   resultOuter.classList.add('closed');
   resultOuter.classList.add('opacityHidden');
-
   moveY = 0;
   moveX = 0;
   houseIcon.classList.replace(compChoice, 'empty');

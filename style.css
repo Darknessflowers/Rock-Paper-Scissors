@@ -1,8 +1,3 @@
-/* TODO: 
-* pixels to rem for font
-* css variables for colours
-* tablet size
-*/
 * {
   box-sizing: border-box;
   font-family: 'Barlow Semi Condensed', sans-serif;
@@ -164,7 +159,6 @@ box-shadow: 0 10px 0 0 #9D1634, inset 0 8px 0px 0 hsl(228.5, 23.2%, 78%), 0px 3p
 #paper:hover,
 #scissors:hover,
 #rock:hover {
-  /* transform: scale(1.1); */
   transition: all 0.2s ease;
 }
 
@@ -209,16 +203,8 @@ box-shadow: 0 10px 0 0 #9D1634, inset 0 8px 0px 0 hsl(228.5, 23.2%, 78%), 0px 3p
 grid-column: 1/-1;
 }
 #results.hidden {
-  /* opacity: 0.5; */
   pointer-events: none;
 }
-/* .resultText {
-  display: none;
-  width: 1px;
-  opacity: 0;
-  /* transition: all 0.3s; */
-  /* width: 200px; */
-/*} */
 .resultText.closed {
   width: 2px;
   overflow: hidden;
