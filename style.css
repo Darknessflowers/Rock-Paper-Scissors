@@ -524,4 +524,7 @@ body {
   transform: initial;
   bottom: 30px;
 }
+.resultText.closed {
+  width: 100%;
+}
 }
